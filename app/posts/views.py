@@ -6,6 +6,8 @@ from rest_framework.response import Response
 
 from posts.models import Post
 from posts.serializers import PostSerializer
+from comments.models import Comment
+from comments.serializers import CommentSerializer
 
 
 class IsAuthorOrIsAuthenticated(IsAuthenticated):
@@ -20,7 +22,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
 
-    search_fields = ['title']
+    search_fields = ['author', 'title']
     ordering_filter = '__all__'
 
     custom_permissions = {
@@ -32,6 +34,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
         # Custom endpoints
         'upvote': [IsAuthenticated],
+        'comments': [IsAuthenticated],
     }
 
     def get_permissions(self):
@@ -45,7 +48,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-    @action(detail=True, methods=['POST'])
+    @action(detail=True, methods=['post'])
     def upvote(self, request, pk=None):
         post = Post.objects.prefetch_related('upvotes').get(pk=pk)
 
@@ -56,3 +59,26 @@ class PostViewSet(viewsets.ModelViewSet):
 
         post_serializer = self.get_serializer(post)
         return Response(post_serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get', 'post'])
+    def comments(self, request, pk=None):
+        if request.method == 'GET':
+            queryset = Comment.objects.filter(post=pk).order_by('-created_on')
+
+            page = self.paginate_queryset(queryset)
+            if page is not None:
+                serializer = CommentSerializer(page, many=True)
+                return self.get_paginated_response(serializer.data)
+
+            serializer = CommentSerializer(page, many=True)
+            return Response(serializer.data)
+        elif request.method == 'POST':
+            if not request.user.is_authenticated:
+                return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+            serializer = CommentSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.validated_data['post'] = Post.objects.filter(pk=pk).first()
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
