@@ -7,6 +7,7 @@ Generated using Django 4.1.1.
 import os
 from pathlib import Path
 from datetime import timedelta
+from celery.schedules import crontab
 
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -176,6 +177,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery
 CELERY_BROKER_URL = "redis://redis:6379"
 CELERY_RESULT_BACKEND = "redis://redis:6379"
+
+CELERY_TIMEZONE = "Europe/Kiev"
+
+CELERY_BEAT_SCHEDULE = {
+    "reset_upvotes": {
+        "task": "posts.tasks.reset_upvotes",
+        "schedule": crontab(hour=1),
+    },
+}
 
 # CORS config
 
