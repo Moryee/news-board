@@ -35,6 +35,8 @@ stats
 Pipfile
 Pipfile.lock
 
+celerybeat-schedule
+
 # React
 
 build
