@@ -9,8 +9,8 @@ urlpatterns = [
     path('api/', include('comments.urls')),
 
     # Auth urls
+    path('api-auth/', include('rest_framework.urls')),
     path('auth/', include('authentication.urls')),
-    path('auth/', include('rest_framework.urls')),
 ]
 
 if bool(settings.DEBUG):

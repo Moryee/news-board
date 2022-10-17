@@ -4,6 +4,7 @@ from comments.models import Comment
 
 class CommentSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
+    created_on = serializers.DateTimeField(format="%Y.%m.%d at %H:%M")
 
     class Meta:
         model = Comment

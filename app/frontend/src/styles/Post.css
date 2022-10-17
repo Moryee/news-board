@@ -1,0 +1,110 @@
+.post {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(240, 242, 245);
+  border-radius: 15px;
+}
+
+.post .post-header,
+.post .post-footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.post-header .upvote {
+  display: block;
+
+  text-decoration: none;
+  border-width: 0;
+  padding: 5px 10px;
+  border-radius: 120px;
+
+  border-color: transparent;
+  background-color: rgb(27, 116, 228);
+  color: white;
+}
+
+.post-header .upvote:hover {
+  background-color: rgb(26, 110, 216);
+  cursor: pointer;
+}
+
+.post-header>.title {
+  margin-left: 10px;
+  margin-right: 3px;
+  color: black;
+  text-decoration: none;
+}
+
+.post-header>.link {
+  text-decoration-line: none;
+  font-weight: bold;
+  color: rgb(27, 116, 228);
+}
+
+.post-header>.title:hover,
+.post-header>.link:hover {
+  text-decoration: underline;
+}
+
+.post-header>.title,
+.post-header>.link {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  margin-left: 10px;
+  display: inline-block;
+  cursor: default;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+
+  background-color: #f9f9f9;
+
+  min-width: 80px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 10px;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+  display: block;
+
+  text-decoration: none;
+  border-width: 0;
+  padding: 6px 1px 6px 1px;
+  text-align: center;
+
+  border-color: transparent;
+  background-color: rgb(27, 116, 228);
+  color: white;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+  background-color: rgb(26, 110, 216);
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.dropdown-content .delete {
+  margin-top: 3px;
+}
+
+.post-footer {
+  margin-left: 45px;
+  font-size: 14px;
+
+  color: rgb(101, 103, 107);
+}
