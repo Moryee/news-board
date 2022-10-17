@@ -1,4 +1,4 @@
-# omdb-api
+# news-board
 
 ## Description
 
