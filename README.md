@@ -10,7 +10,7 @@ You must have ```Docker``` installed.
 
 - Download this project.
 - Open project root directory with terminal.
-- Run ```docker-compose up -d --build```, to bring down containers ```docker-compose down -v```.
+- Run ```docker-compose up -d --build```, to bring down containers ```docker-compose down -v```. If you faced with issue ```exec /app/api/entrypoint.sh: no such file or directory``` try to change line endings of ```news-board/app/entrypoint.sh``` file.
 - After it started open http://localhost:3000/.
 - Register on the site. If there is an error if there is a registration error "Something went wrong" you probably need to complicate password, I didn't add password validation on complexity to UI.
 
