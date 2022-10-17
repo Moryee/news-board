@@ -1,5 +1,9 @@
 from django.urls import path
-from authentication.views import RegisterView
+from authentication.views import (
+    RegisterView,
+    login_view,
+    logout_view,
+)
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -15,4 +19,7 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
+
+    path('login/', login_view, name='api-login'),
+    path('logout/', logout_view, name='api-logout'),
 ]

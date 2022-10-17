@@ -1,0 +1,28 @@
+.comment {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(240, 242, 245);
+  border-radius: 15px;
+}
+
+.comment-header,
+.comment-body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.comment .username {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.comment .created-on {
+  font-size: 13px;
+  padding-top: 1px;
+  color: rgb(101, 103, 107);
+}
+
+.comment .dropdown {
+  padding-bottom: 10px;
+}

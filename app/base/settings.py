@@ -53,7 +53,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
@@ -189,8 +188,9 @@ CELERY_BEAT_SCHEDULE = {
 
 # CORS config
 
-CORS_ORIGIN_ALLOW_ALL = bool(os.environ.get("DEBUG", default=False))
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+]
 
-CORS_ORIGIN_WHITELIST = (
-    'https://localhost:3000',
-)
+LOGIN_REDIRECT_URL = '/api/'

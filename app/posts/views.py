@@ -34,7 +34,6 @@ class PostViewSet(viewsets.ModelViewSet):
 
         # Custom endpoints
         'upvote': [IsAuthenticated],
-        'comments': [IsAuthenticated],
     }
 
     def get_permissions(self):

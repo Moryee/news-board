@@ -5,6 +5,7 @@ from posts.models import Post
 class PostSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='author.username', read_only=True)
     upvotes = serializers.CharField(source='total_upvotes', read_only=True)
+    created_on = serializers.DateTimeField(format="%Y.%m.%d at %H:%M")
 
     class Meta:
         model = Post

@@ -1,0 +1,28 @@
+.pegination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin: auto;
+}
+
+.pegination button {
+  padding: 10px;
+  border-radius: 7px;
+  border-width: 0;
+
+  border-color: transparent;
+  background-color: rgb(27, 116, 228);
+  color: white;
+}
+
+.pegination button:hover {
+  background-color: rgb(26, 110, 216);
+  cursor: pointer;
+}
+
+.page-number {
+  margin-left: 20px;
+  margin-right: 20px;
+}
