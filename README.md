@@ -135,6 +135,7 @@ app/docker-compose.yml ln13
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_DB=news_board_dev
 ```
+- Nginx processes responses before they arrive to backend.
 
 ### Frontend part
 
