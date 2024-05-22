@@ -25,6 +25,7 @@ RUN chmod +x /app/api/entrypoint.sh
 
 # Copy project
 COPY . .
+# RUN flake8 --ignore=E501,F401,F403 .
 
 # Run entrypoint.sh
 ENTRYPOINT ["/app/api/entrypoint.sh"]
