@@ -1,25 +1,22 @@
-import { createContext, useState, useEffect, useReducer } from "react";
+import React from "react";
+import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
-
 const AuthContext = createContext();
-
 
 export default AuthContext;
 
-
-function user_decoder (data) {
+function user_decoder(data) {
   if (data) {
-    jwt_decode(data.access)
+    jwt_decode(data.access);
     return {
       username: data.username,
-      email: data.email
-    }
+      email: data.email,
+    };
   }
-  return null
+  return null;
 }
-
 
 export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -42,12 +39,12 @@ export const AuthProvider = ({ children }) => {
     const response = await fetch("http://localhost:8000/auth/login/", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username,
-        password
-      })
+        password,
+      }),
     });
     const data = await response.json();
 
@@ -57,26 +54,29 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("authTokens", JSON.stringify(data));
       navigate("/");
     } else {
+      console.log(">>>LOGIN ERROR", response, data);
       alert("Something went wrong!");
     }
   };
-  
+
   const registerUser = async (username, email, password1, password2) => {
     const response = await fetch("http://localhost:8000/auth/register/", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username,
         email,
         password1,
-        password2
-      })
+        password2,
+      }),
     });
     if (response.status === 201) {
       navigate("/login");
     } else {
+      const data = await response.json();
+      console.log(">>>REGISTER ERROR", response, data);
       alert("Something went wrong!");
     }
   };
@@ -88,15 +88,15 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
-  function isAuthor (post_author) {
-    if (user == null) {
-      return false
+  function isAuthor(post_author) {
+    if (user === null) {
+      return false;
     }
 
-    if (user.username == post_author) {
-      return true
+    if (user.username === post_author) {
+      return true;
     }
-    return false
+    return false;
   }
 
   const contextData = {
@@ -110,7 +110,7 @@ export const AuthProvider = ({ children }) => {
 
     // other
     user_decoder,
-    isAuthor
+    isAuthor,
   };
 
   useEffect(() => {

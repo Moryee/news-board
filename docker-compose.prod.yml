@@ -47,7 +47,7 @@ services:
         command : npm start
         container_name: frontend
         build:
-            context: ./app/frontend/
+            context: ./frontend/
             dockerfile: Dockerfile
         ports:
             - "3000:3000"
