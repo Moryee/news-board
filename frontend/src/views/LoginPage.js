@@ -1,25 +1,26 @@
-import { useContext, useState } from "react";
+import React from "react";
+import { useContext, useMemo } from "react";
 import AuthContext from "../context/AuthContext";
 
 import LoginForm from "../components/Auth/LoginForm";
 
-
 const LoginPage = () => {
-  const [formValues, setFormValues] = useState({ username: '', password: '' })
+  const formValues = useMemo(() => ({ username: "", password: "" }), []);
   const { loginUser } = useContext(AuthContext);
 
-
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     loginUser(e.username, e.password);
   };
 
   return (
-    <LoginForm initialValues={formValues}
+    <LoginForm
+      initialValues={formValues}
       onSubmit={onSubmit}
-      enableReinitialize>
+      enableReinitialize
+    >
       Login
     </LoginForm>
-  )
+  );
 };
 
 export default LoginPage;
